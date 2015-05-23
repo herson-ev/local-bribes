@@ -11,6 +11,7 @@ include_once("classes/db.php");
         <link rel="stylesheet" type="text/css" href="http://4aniversariomovistar.com/jquery/jquery-ui.theme.min.css">
 
         <?php
+        $db = new Db();
         ?>
 
         <script type="text/javascript">
@@ -40,11 +41,13 @@ include_once("classes/db.php");
                 show_details();
                 show_amount();
             }
-
+        </script>
+        
+        <script type="text/javascript">
             $(function () {
                 var availableLocations = [
                     <?php
-                    echo get_concatenated_city_names();
+                    echo $db->get_concatenated_city_names();
                     ?>
                 ];
                 $("#txtLocation").autocomplete({
@@ -89,20 +92,16 @@ include_once("classes/db.php");
             <input type="submit" name="btnSendForm" value="Send">
         </div>
 
-
         <?php
         if (isset($_POST["txtName"])) {
             echo "The form was submitted - your name is: " . $_POST["txtName"];
         }
         ?>
+        
         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
             Your name:
             <input type="text" name="txtName" />
             <input type="submit" name="btnSendForm" value="Send" />
         </form>
-
-        <?php
-        mysql_close();
-        ?>
     </body>
 </html>
