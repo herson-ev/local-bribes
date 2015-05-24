@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 23, 2015 at 04:14 AM
+-- Generation Time: May 24, 2015 at 03:45 AM
 -- Server version: 5.5.43-0+deb8u1
 -- PHP Version: 5.6.7-1
 
@@ -19,6 +19,29 @@ SET time_zone = "+00:00";
 --
 -- Database: `bribe`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `institution`
+--
+
+CREATE TABLE IF NOT EXISTS `institution` (
+`id` int(11) NOT NULL,
+  `name` varchar(200) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `institution`
+--
+
+INSERT INTO `institution` (`id`, `name`) VALUES
+(1, 'Institution A'),
+(2, 'Institution B'),
+(3, 'Police'),
+(4, 'Customs'),
+(5, 'Municipality X'),
+(6, 'Municipality Y');
 
 -- --------------------------------------------------------
 
@@ -57,6 +80,12 @@ INSERT INTO `location` (`id`, `level`, `parent`, `name`, `abbreviation`) VALUES
 --
 
 --
+-- Indexes for table `institution`
+--
+ALTER TABLE `institution`
+ ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `location`
 --
 ALTER TABLE `location`
@@ -66,6 +95,11 @@ ALTER TABLE `location`
 -- AUTO_INCREMENT for dumped tables
 --
 
+--
+-- AUTO_INCREMENT for table `institution`
+--
+ALTER TABLE `institution`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `location`
 --
