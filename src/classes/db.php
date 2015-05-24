@@ -49,6 +49,14 @@ class Db {
             $result = $result . $this->get_all_names($row["id"], "");
         return $result;
     }
+    
+    public function get_concatenated_institution_names() {
+        $query = mysql_query("select name from institution");
+        $result = "";
+        while ($row = mysql_fetch_array($query))
+            $result = $result . "\"" . $row["name"] . "\", ";
+        return $result;
+    }
 }
 
 ?>
