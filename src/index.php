@@ -4,13 +4,58 @@ include_once("classes/db.php");
 
 <html>  
     <head>
-        <script src="http://4aniversariomovistar.com/jquery/external/jquery/jquery.js"></script>
-        <script src="http://4aniversariomovistar.com/jquery/jquery-ui.js"></script>
-        <link rel="stylesheet" type="text/css" href="http://4aniversariomovistar.com/jquery/jquery-ui.min.css">
-        <link rel="stylesheet" type="text/css" href="http://4aniversariomovistar.com/jquery/jquery-ui.structure.min.css">
-        <link rel="stylesheet" type="text/css" href="http://4aniversariomovistar.com/jquery/jquery-ui.theme.min.css">
-        <link rel="stylesheet" type="text/css" href="../css/style.css">
+        <title>Local-bribes generic instance</title>
+        <meta name="description" content="This is local-bribes instance!">
+        <meta name="author" content="Herson Esquivel Vargas">
+        <!-- jQuery -->
+        <script src="../js/jquery.js"></script>
+        <script src="../js/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="../css/jquery-ui.min.css">
+        <link rel="stylesheet" type="text/css" href="../css/jquery-ui.structure.min.css">
+        <link rel="stylesheet" type="text/css" href="../css/jquery-ui.theme.min.css">
+        <!-- Bootstrap -->
+        <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link href="../css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+        <script src="../js/bootstrap.min.js"></script>
+        <!-- Custom -->
+        <style type="text/css">
+  body {
+    padding-top: 20px;
+    padding-bottom: 40px;
+  }
 
+  /* Custom container */
+  .container-narrow {
+    margin: 0 auto;
+    max-width: 700px;
+  }
+  .container-narrow > hr {
+    margin: 30px 0;
+  }
+
+  /* Main marketing message and sign up button */
+  .jumbotron {
+    margin: 60px 0;
+    text-align: center;
+  }
+  .jumbotron h1 {
+    font-size: 72px;
+    line-height: 1;
+  }
+  .jumbotron .btn {
+    font-size: 21px;
+    padding: 14px 24px;
+  }
+
+  /* Supporting marketing content */
+  .marketing {
+    margin: 60px 0;
+  }
+  .marketing p + h4 {
+    margin-top: 28px;
+  }
+        </style>
+        
         <?php
         $db = new Db();
         ?>
@@ -69,58 +114,74 @@ include_once("classes/db.php");
 
     </head>
     <body>
+        <div class="container-narrow">
+            <div class="masthead">
+                <ul class="nav nav-pills pull-right">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="#">Statistics</a></li>
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Disclaimer</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+                <h3 class="muted">Local bribes</h3>
+            </div>
 
-        <div><h1>Local bribes</h1></div>
-        
-        <div id="report">
-            <div><h2>Report</h2></div>
-            <div id="location">
+            <hr>
+
+            <div class="jumbotron" style="border: dashed">
+                <h1>Report!</h1>
                 <h3>Location</h3>        
-                <input type="text" id="txtLocation" name="txtLocation" size="50" title="Start typing in the name of your city and then choose it from the dropdown." />
-            </div>
-            <div>
-                <h3>Institution</h3>
-                <input type="text" id="txtInstitution" name="txtInstitution" size="50" title="Start typing in the name of the organization and then choose it from the dropdown."/>
-            </div>
-            <div>
-                <h3>What happened?</h3>
-                <table>
-                    <tr><td><input type="button" value="I paid a bribe" onclick="paid();"/></td>
-                        <td><input type="button" value="I did not pay a bribe" onclick="not_paid();"/></td>
-                        <td><input type="button" value="I met an honest officer" onclick="not_paid();"/></td>
-                    </tr>
-                </table>
-            </div>
-            <div id="details" style="visibility: hidden">
-                <h3>Details</h3>
-                Your report can be improved by adding more details.<br/>
-                <label for="description">Description: </label>
-                <textarea cols="50" rows="6" name="description"></textarea>
-            </div>
-            <div id="amount" style="visibility: hidden">
-                <label for="amount">Amount paid: </label>
-                <input type="text" name="amount">
-            </div>
-            <div id="send_div" style="visibility: hidden">
-                <input type="submit" name="btnSendForm" value="Send">
-            </div>
-
-
-            <div id="footer">
-                <div id="about">
-                    <h3>About this Page</h3>
-                    <p>This is a Local-bribes generic instance.</p>
+                <input type="text" id="txtLocation" name="txtLocation" class="span3" title="Start typing in the name of your city and then choose it from the dropdown." />
+                
+                <div>
+                    <h3>Institution</h3>
+                    <input type="text" id="txtInstitution" name="txtInstitution" class="span3" title="Start typing in the name of the organization and then choose it from the dropdown."/>
                 </div>
-                <div id="credits">
-                    <h3>Credits</h3>
-                    <dl>
-                        <dt>Web Fonts: </dt>
-                        <dd></dd>
-                        <dt>Illustrations: </dt>
-                        <dd></dd>
-                    </dl>
+                <div>
+                    <h3>What happened?</h3>
+                    <a class="btn btn-large btn-danger" onclick="paid();">I paid a bribe</a>
+                    <a class="btn btn-large btn-success" onclick="not_paid();">I did not pay a bribe</a>
+                    <a class="btn btn-large btn-primary" onclick="not_paid();">I met an honest officer</a>
+
+                </div>
+
+                <div id="details" style="visibility: hidden">
+                    <h3>Details</h3>
+                    Improve your report adding more details.<br/>
+                    <textarea cols=110 rows=6 placeholder="Add here a description..." name="description" class="span5"></textarea>
+                </div>
+                <div id="amount" style="visibility: hidden">
+                    <label for="amount">Amount paid: </label>
+                    <div class="input-prepend">
+                        <span class="add-on">USD $</span>
+                        <input class="span2" id="prependedInput" type="text">
+                    </div>
+                </div>
+
+                <div id="send_div" style="visibility: hidden">
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Send report!</button>
+                        <button type="button" class="btn">Cancel</button>
+                    </div>
                 </div>
             </div>
-        </div>
+            <div class="row-fluid marketing">
+                <div class="span6">
+                    <h4>Subheading</h4>
+                    <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+
+                    <h4>Subheading</h4>
+                    <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+
+                    <h4>Subheading</h4>
+                    <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+                </div>
+            </div>
+            <hr>
+            <div class="footer">
+                <p>Local bribes is Free Software <a href="#">GPL v3</a>.</p>
+            </div>
+        </div><!-- /container -->
     </body>
 </html>
