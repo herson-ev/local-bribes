@@ -7,13 +7,14 @@
  */
 class Db {
     private $database_name = "";
-    private $database_server = "";
+    private $database_server = "localhost";
     private $database_user = "";
     private $database_pass = "";
 
     public function __construct() {
         mysql_connect($this->database_server, $this->database_user, $this->database_pass);
         mysql_select_db($this->database_name);
+        mysql_set_charset('utf8');
     }
     
     public function __destruct() {
