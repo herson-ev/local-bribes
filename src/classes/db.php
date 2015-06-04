@@ -7,7 +7,7 @@
  */
 class Db {
     private $database_name = "";
-    private $database_server = "localhost";
+    private $database_server = "";
     private $database_user = "";
     private $database_pass = "";
 
@@ -35,7 +35,7 @@ class Db {
     private function get_all_names($id, $final_string) {
         $generic_place = $this->get_name($id);
         if ($generic_place["parent"] == 0) {
-            return "\"" . $final_string . $generic_place["name"] . "\", ";
+            return $final_string . $generic_place["name"];
         } else {
             $final_string = $final_string . $generic_place["name"] . ", ";
             return $this->get_all_names($generic_place["parent"], $final_string);
@@ -45,17 +45,18 @@ class Db {
     public function get_concatenated_city_names() {
         $levels = $this->get_levels();
         $query = mysql_query("select * from location where level=$levels");
-        $result = "";
+        $result = array();
         while ($row = mysql_fetch_array($query))
-            $result = $result . $this->get_all_names($row["id"], "");
+            array_push ($result, $this->get_all_names($row["id"], ""));
         return $result;
+        //return array("Dog", "Cat", "Snake", "Gull", "Jaguar");
     }
     
     public function get_concatenated_institution_names() {
         $query = mysql_query("select name from institution");
-        $result = "";
+        $result = array();
         while ($row = mysql_fetch_array($query))
-            $result = $result . "\"" . $row["name"] . "\", ";
+            array_push ($result, $row["name"]);
         return $result;
     }
 }

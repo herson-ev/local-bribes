@@ -7,12 +7,6 @@ include_once("classes/db.php");
         <title>Local-bribes generic instance</title>
         <meta name="description" content="This is local-bribes instance!">
         <meta name="author" content="Herson Esquivel Vargas">
-        <!-- jQuery -->
-        <script src="../js/jquery.js"></script>
-        <script src="../js/jquery-ui.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="../css/jquery-ui.min.css">
-        <link rel="stylesheet" type="text/css" href="../css/jquery-ui.structure.min.css">
-        <link rel="stylesheet" type="text/css" href="../css/jquery-ui.theme.min.css">
         <!-- Bootstrap -->
         <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="../css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
@@ -88,30 +82,6 @@ include_once("classes/db.php");
                 show_amount();
             }
         </script>
-
-        <script type="text/javascript">
-            $(function () {
-                var availableLocations = [
-                <?php
-                    echo $db->get_concatenated_city_names();
-                ?>
-                ];
-                $("#txtLocation").autocomplete({
-                    source: availableLocations
-                });
-            });
-            $(function () {
-                var availableInstitutions = [
-                <?php
-                    echo $db->get_concatenated_institution_names();
-                ?>
-                ];
-                $("#txtInstitution").autocomplete({
-                    source: availableInstitutions
-                });
-            });
-        </script>
-
     </head>
     <body>
         <div class="container-narrow">
@@ -131,20 +101,42 @@ include_once("classes/db.php");
 
             <div class="jumbotron" style="border: dashed">
                 <h1>Report!</h1>
-                <h3>Location</h3>        
-                <input type="text" id="txtLocation" name="txtLocation" class="span3" title="Start typing in the name of your city and then choose it from the dropdown." />
                 
-                <div>
-                    <h3>Institution</h3>
-                    <input type="text" id="txtInstitution" name="txtInstitution" class="span3" title="Start typing in the name of the organization and then choose it from the dropdown."/>
-                </div>
-                <div>
-                    <h3>What happened?</h3>
-                    <a class="btn btn-large btn-danger" onclick="paid();">I paid a bribe</a>
-                    <a class="btn btn-large btn-success" onclick="not_paid();">I did not pay a bribe</a>
-                    <a class="btn btn-large btn-primary" onclick="not_paid();">I met an honest officer</a>
+                <h3>Location</h3>        
+                <input type="text" id="txtLocation" name="txtLocation" 
+                       class="span4" list="locationsList"
+                       title="Start typing in the name of your city and then choose it from the dropdown." />
+                <datalist id="locationsList">
+                    <?php
+                    $locations = $db->get_concatenated_city_names();
+                    foreach ($locations as $location) {
+                    ?>
+                        <option><?php echo $location ?></option>
+                    <?php
+                    }
+                    ?>
+                </datalist>
+                                
+                <h3>Institution</h3>
+                <input type="text" id="txtInstitution" name="txtInstitution"
+                       class="span4" list="institutionsList"
+                       title="Start typing in the name of the organization and then choose it from the dropdown."/>
+                <datalist id="institutionsList">
+                    <?php
+                    $institutions = $db->get_concatenated_institution_names();
+                    foreach ($institutions as $institution) {
+                    ?>
+                        <option><?php echo $institution ?></option>
+                    <?php
+                    }
+                    ?>
+                </datalist>
+                
+                <h3>What happened?</h3>
+                <a class="btn btn-large btn-danger" onclick="paid();">I paid a bribe</a>
+                <a class="btn btn-large btn-success" onclick="not_paid();">I did not pay a bribe</a>
+                <a class="btn btn-large btn-primary" onclick="not_paid();">I met an honest officer</a>
 
-                </div>
 
                 <div id="details" style="visibility: hidden">
                     <h3>Details</h3>
