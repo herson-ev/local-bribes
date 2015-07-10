@@ -28,7 +28,12 @@ class Db {
     }
 
 
-    public function get_levels() {
+    /**
+     * 
+     * @return type (integer) max level is how "deep" locations are stored in
+     * the DB. For example: district, canton, province is a level 3 location.
+     */
+    public function get_location_depth() {
         $query_txt = "SELECT max(level) FROM location";
         if (!$result = $this->mysqli->query($query_txt)) {
             die("There was an error retrieving city levels.");
@@ -38,43 +43,50 @@ class Db {
         return $row[0];
     }
 
-    private function get_name($id) {
-        $query_txt = "select * from location where id=$id";
-        if (!$result = $this->mysqli->query($query_txt)) {
-            die("There was an error retrieving a city row.");
-        }
+    /**
+     *
+     * @param type $id (integer) of the institution we are looking for.
+     * @return type (string) institution name or null if not found.
+     */
+    public function get_location_by_id($id) {
+        $query_txt = "SELECT id, parent, name FROM location WHERE id = ?";
         
-        $row = $result->fetch_assoc();
-        return $row;
-    }
-
-    private function get_all_names($id, $final_string) {
-        $generic_place = $this->get_name($id);
-        if ($generic_place["parent"] == 0) {
-            return $final_string . $generic_place["name"];
-        } else {
-            $final_string = $final_string . $generic_place["name"] . ", ";
-            return $this->get_all_names($generic_place["parent"], 
-                                            $final_string);
+        $stmt = $this->mysqli->stmt_init();
+        if ($stmt->prepare($query_txt)) {
+            $stmt->bind_param("i", $id);
+            $stmt->execute();            
+            $stmt->bind_result($id, $parent, $name);
+            $stmt->fetch();            
+            $stmt->close();
+            
+            return array("id" => $id, "parent" => $parent, "name" => $name);
         }
     }
 
-    public function get_locations() {
+    public function get_locations_by_level($level) {
         $result_array = array();
-        $levels = $this->get_levels();
-        $query_txt = "select * from location where level=$levels";
-        if (!$result = $this->mysqli->query($query_txt)) {
-            die("There was an error retrieving cities.");
+        $query_txt = "SELECT id, parent, name FROM location WHERE level=?";
+        
+        $stmt = $this->mysqli->stmt_init();
+        if ($stmt->prepare($query_txt)) {
+            $stmt->bind_param("i", $level);
+            $stmt->execute();
+            
+            $stmt->bind_result($id, $parent, $name);
+            while($stmt->fetch()) {
+                array_push($result_array, array("id" => $id,
+                    "parent" => $parent, "name" => $name));
+            }
+             
+            $stmt->close();
         }
         
-        while ($row = $result->fetch_assoc())
-            array_push($result_array, $this->get_all_names($row["id"], ""));
         return $result_array;
     }
 
     public function get_institution_names() {
         $result_array = array();
-        $query_txt = "select name from institution";
+        $query_txt = "SELECT name FROM institution";
         if (!$result = $this->mysqli->query($query_txt)) {
             die("There was an error retrieving institutions.");
         }
@@ -121,7 +133,7 @@ class Db {
     /*
      * Returns an array of location ids fulfilling the requirements.
      */
-    public function find_location_by_level_name($level, $name) {
+    public function get_location_by_level_name($level, $name) {
         $result_array = array();
         $query_txt = "SELECT id FROM location WHERE level = ? AND name = ?";
         

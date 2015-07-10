@@ -60,7 +60,7 @@ class submitController {
      * If it is wrong, returns a string explaining the error.
      */
     private function validate_location($location_string) {
-        $max_location_level = $this->db->get_levels();
+        $max_location_level = $this->db->get_location_depth();
         $location_parts = explode(",", $location_string);
         
         if(count($location_parts) != $max_location_level) {
@@ -68,7 +68,7 @@ class submitController {
         }
         //Id(s) of locations... hopefully one
         $nth_level_locs_same_name = $this->db->
-            find_location_by_level_name($max_location_level,
+            get_location_by_level_name($max_location_level,
                                         $location_parts[0]);
         return $nth_level_locs_same_name;
         //TODO: 2+ cantons with the same name on different provinces.

@@ -1,5 +1,6 @@
 <?php
-include_once("classes/db.php");
+include_once("controllers/indexController.php");
+$controller = new indexController();
 ?>
 
 <html>  
@@ -49,10 +50,6 @@ include_once("classes/db.php");
     margin-top: 28px;
   }
         </style>
-        
-        <?php
-        $db = new Db();
-        ?>
 
         <script type="text/javascript">
             function paid() {
@@ -119,7 +116,7 @@ include_once("classes/db.php");
                        title="Start typing in the name of your city and then choose it from the dropdown." />
                 <datalist id="locationsList">
                     <?php
-                    $locations = $db->get_locations();
+                    $locations = $controller->get_locations();
                     foreach ($locations as $location) {
                     ?>
                         <option><?php echo $location ?></option>
@@ -135,7 +132,7 @@ include_once("classes/db.php");
                        title="Start typing in the name of the organization and then choose it from the dropdown."/>
                 <datalist id="institutionsList">
                     <?php
-                    $institutions = $db->get_institution_names();
+                    $institutions = $controller->get_institution_names();
                     foreach ($institutions as $institution) {
                     ?>
                         <option><?php echo $institution ?></option>

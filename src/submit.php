@@ -1,5 +1,5 @@
 <?php
-include_once("classes/submitController.php");
+include_once("controllers/submitController.php");
 include_once("classes/report.php");
 ?>
 
