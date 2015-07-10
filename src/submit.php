@@ -59,7 +59,6 @@ include_once("classes/report.php");
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Statistics</a></li>
                 <li><a href="#">Privacy</a></li>
-                <li><a href="#">Disclaimer</a></li>
                 <li><a href="#">About</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>

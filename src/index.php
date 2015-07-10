@@ -95,7 +95,6 @@ $controller = new indexController();
                     <li class="active"><a href="#">Home</a></li>
                     <li><a href="#">Statistics</a></li>
                     <li><a href="#">Privacy</a></li>
-                    <li><a href="#">Disclaimer</a></li>
                     <li><a href="#">About</a></li>
                     <li><a href="#">Contact</a></li>
                 </ul>
@@ -173,16 +172,32 @@ $controller = new indexController();
                     </div>
                 </div>
             </div>
-            <div class="row-fluid marketing">
-                <div class="span6">
-                    <h4>Subheading</h4>
-                    <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-                    <h4>Subheading</h4>
-                    <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-                    <h4>Subheading</h4>
-                    <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+            <div class="row-fluid marketing">                
+                <h2>Latest reports</h2>
+                <?php
+                $reports = $controller->get_latest_reports();
+                ?>
+                <div>
+                    <?php
+                    foreach($reports as $report) {
+                        $inst_id = $report["institution"];
+                        ?>
+                        <h4 class="<?php 
+                            switch($report["event"]){
+                                case 1: echo "btn-danger"; break; //Paid
+                                case 2: echo "btn-success"; break; //Did not pay
+                                case 3: echo "btn-primary"; break; //Honest
+                            }?>"
+                        >
+                        <?php
+                        echo $controller->get_institution_by_id($inst_id);
+                        ?>
+                        </h4>
+                    <div><b><?php echo $report["amount"] ?></b> on <?php echo $report["date"] ?> </div>
+                        <?php
+                        echo "<p>" . $report["description"] . "</p>\n";
+                    }
+                    ?>
                 </div>
             </div>
             <hr>
