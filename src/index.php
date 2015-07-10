@@ -58,11 +58,19 @@ include_once("classes/db.php");
             function paid() {
                 hide_both();
                 show_both();
+                document.getElementById("eventField").value=1;
             }
 
             function not_paid() {
                 hide_both();
                 show_details();
+                document.getElementById("eventField").value=2;
+            }
+            
+            function honest() {
+                hide_both();
+                show_details();
+                document.getElementById("eventField").value=3;
             }
 
             function hide_both() {
@@ -102,13 +110,16 @@ include_once("classes/db.php");
             <div class="jumbotron" style="border: dashed">
                 <h1>Report!</h1>
                 
+                <form id="report_form" action="submit.php" method="post" />
+                
                 <h3>Location</h3>        
                 <input type="text" id="txtLocation" name="txtLocation" 
-                       class="span4" list="locationsList"
+                       class="span4" list="locationsList" autocomplete="off"
+                       form="report_form"
                        title="Start typing in the name of your city and then choose it from the dropdown." />
                 <datalist id="locationsList">
                     <?php
-                    $locations = $db->get_concatenated_city_names();
+                    $locations = $db->get_locations();
                     foreach ($locations as $location) {
                     ?>
                         <option><?php echo $location ?></option>
@@ -119,11 +130,12 @@ include_once("classes/db.php");
                                 
                 <h3>Institution</h3>
                 <input type="text" id="txtInstitution" name="txtInstitution"
-                       class="span4" list="institutionsList"
+                       class="span4" list="institutionsList" autocomplete="off"
+                       form="report_form"
                        title="Start typing in the name of the organization and then choose it from the dropdown."/>
                 <datalist id="institutionsList">
                     <?php
-                    $institutions = $db->get_concatenated_institution_names();
+                    $institutions = $db->get_institution_names();
                     foreach ($institutions as $institution) {
                     ?>
                         <option><?php echo $institution ?></option>
@@ -135,25 +147,31 @@ include_once("classes/db.php");
                 <h3>What happened?</h3>
                 <a class="btn btn-large btn-danger" onclick="paid();">I paid a bribe</a>
                 <a class="btn btn-large btn-success" onclick="not_paid();">I did not pay a bribe</a>
-                <a class="btn btn-large btn-primary" onclick="not_paid();">I met an honest officer</a>
-
+                <a class="btn btn-large btn-primary" onclick="honest();">I met an honest officer</a>
+                <input type="hidden" form="report_form" name="eventCode" id="eventField">
 
                 <div id="details" style="visibility: hidden">
                     <h3>Details</h3>
                     Improve your report adding more details.<br/>
-                    <textarea cols=110 rows=6 placeholder="Add here a description..." name="description" class="span5"></textarea>
+                    <textarea cols=110 rows=6 class="span5" form="report_form"
+                              placeholder="Add here a description..."
+                              name="details"></textarea>
                 </div>
                 <div id="amount" style="visibility: hidden">
                     <label for="amount">Amount paid: </label>
                     <div class="input-prepend">
                         <span class="add-on">USD $</span>
-                        <input class="span2" id="prependedInput" type="text">
+                        <input class="span2" id="prependedInput" name="amount"
+                               type="text" form="report_form" autocomplete="off">
                     </div>
                 </div>
 
                 <div id="send_div" style="visibility: hidden">
                     <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">Send report!</button>
+                        <button type="submit" class="btn btn-primary" 
+                                form="report_form" name="formSubmit">
+                                Send report!
+                        </button>
                         <button type="button" class="btn">Cancel</button>
                     </div>
                 </div>

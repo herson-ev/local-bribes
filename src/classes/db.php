@@ -1,4 +1,5 @@
 <?php
+include_once("report.php");
 
 /**
  * Description of db
@@ -26,12 +27,9 @@ class Db {
         }
     }
 
-    public function __destruct() {
-        mysql_close();
-    }
 
-    private function get_levels() {
-        $query_txt = "select max(level) as max from location";
+    public function get_levels() {
+        $query_txt = "SELECT max(level) FROM location";
         if (!$result = $this->mysqli->query($query_txt)) {
             die("There was an error retrieving city levels.");
         }
@@ -61,7 +59,7 @@ class Db {
         }
     }
 
-    public function get_city_names() {
+    public function get_locations() {
         $result_array = array();
         $levels = $this->get_levels();
         $query_txt = "select * from location where level=$levels";
@@ -86,10 +84,60 @@ class Db {
         return $result_array;
     }
 
-    public function save_report() {
-        $stmt = "INSERT INTO report(location, institution, event, detail, amount) VALUES(?, ?, ?, ?, ? ?)";
+    public function save_report($id_loc, $id_ins, $ev_code, $detail, $amount) {
+        $query_txt = "INSERT INTO report (location, institution, event,"
+                . " detail, amount) VALUES (?, ?, ?, ?, ?)";
+        
+        $stmt = $this->mysqli->stmt_init();
+        if ($stmt->prepare($query_txt)) {
+            $stmt->bind_param("iiisd", $id_loc, $id_ins, $ev_code, $detail, 
+                    $amount);
+            $stmt->execute();
+            $stmt->close();
+        }
     }
 
-}
+    /**
+     * Precondition: Institution names are unique.
+     * @param type $name (string) of the institution we are looking for.
+     * @return type (integer) is the ID of the institution or null if not found.
+     */
+    public function is_institution_in_db($name) {
+        $query_txt = "SELECT id FROM institution WHERE name = ?";
+        
+        $stmt = $this->mysqli->stmt_init();
+        if ($stmt->prepare($query_txt)) {
+            $stmt->bind_param("s", $name);
+            $stmt->execute();
+            
+            $stmt->bind_result($result);
+            $stmt->fetch();            
+            $stmt->close();
+            
+            return $result;
+        }
+    }
+    
+    /*
+     * Returns an array of location ids fulfilling the requirements.
+     */
+    public function find_location_by_level_name($level, $name) {
+        $result_array = array();
+        $query_txt = "SELECT id FROM location WHERE level = ? AND name = ?";
+        
+        $stmt = $this->mysqli->stmt_init();
+        if ($stmt->prepare($query_txt)) {
+            $stmt->bind_param("is", $level, $name);
+            $stmt->execute();
+            
+            $stmt->bind_result($result);
+            while($stmt->fetch()) {
+                array_push($result_array, $result);
+            }
 
-?>
+            $stmt->close();            
+            return $result;
+        }
+        return $result_array;
+    }
+}

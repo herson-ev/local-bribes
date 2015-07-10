@@ -76,6 +76,20 @@ INSERT INTO `location` (`id`, `level`, `parent`, `name`, `abbreviation`) VALUES
 (12, 2, 4, 'Canton4.2', 'C8');
 
 --
+-- Table structure for table `report`
+--
+
+CREATE TABLE IF NOT EXISTS `report` (
+  `id` int(11) NOT NULL,
+  `location` int(11) NOT NULL,
+  `institution` int(11) NOT NULL,
+  `event` int(1) NOT NULL,
+  `detail` text,
+  `amount` decimal(10,2) DEFAULT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+--
 -- Indexes for dumped tables
 --
 
@@ -83,13 +97,19 @@ INSERT INTO `location` (`id`, `level`, `parent`, `name`, `abbreviation`) VALUES
 -- Indexes for table `institution`
 --
 ALTER TABLE `institution`
- ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `id` (`id`);
 
 --
 -- Indexes for table `location`
 --
 ALTER TABLE `location`
- ADD PRIMARY KEY (`id`);
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `id` (`id`);
+
+--
+-- Indexes for table `report`
+--
+ALTER TABLE `report`
+ ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `id` (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -105,6 +125,11 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 ALTER TABLE `location`
 MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT for table `report`
+--
+ALTER TABLE `report`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
