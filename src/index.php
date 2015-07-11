@@ -202,7 +202,7 @@ $controller = new indexController();
             </div>
             <hr>
             <div class="footer">
-                <p>Local bribes is Free Software <a href="#">GPL v3</a>.</p>
+                <p>Local bribes is Free Software <a href="http://www.gnu.org/licenses/gpl.html">GPL v3</a>.</p>
             </div>
         </div><!-- /container -->
     </body>
