@@ -2,8 +2,8 @@
 include_once("controllers/submitController.php");
 include_once("classes/report.php");
 ?>
-
-<html>  
+<!DOCTYPE html>
+<html lang="en">
     <head>
         <title>Local-bribes generic instance</title>
         <meta name="description" content="This is local-bribes instance!">
@@ -13,45 +13,8 @@ include_once("classes/report.php");
         <link href="../css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <script src="../js/bootstrap.min.js"></script>
         <!-- Custom -->
-        <style type="text/css">
-            body {
-                padding-top: 20px;
-                padding-bottom: 40px;
-            }
-
-            /* Custom container */
-            .container-narrow {
-                margin: 0 auto;
-                max-width: 700px;
-            }
-            .container-narrow > hr {
-                margin: 30px 0;
-            }
-
-            /* Main marketing message and sign up button */
-            .jumbotron {
-                margin: 60px 0;
-                text-align: center;
-            }
-            .jumbotron h1 {
-                font-size: 72px;
-                line-height: 1;
-            }
-            .jumbotron .btn {
-                font-size: 21px;
-                padding: 14px 24px;
-            }
-
-            /* Supporting marketing content */
-            .marketing {
-                margin: 60px 0;
-            }
-            .marketing p + h4 {
-                margin-top: 28px;
-            }
-        </style>
-    </script>
-</head>
+        <link href="../css/style.css" rel="stylesheet" media="screen">
+    </head>
 <body>
     <div class="container-narrow">
         <div class="masthead">
