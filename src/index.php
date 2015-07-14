@@ -2,8 +2,8 @@
 include_once("controllers/indexController.php");
 $controller = new indexController();
 ?>
-
-<html>  
+<!DOCTYPE html>
+<html lang="en">
     <head>
         <title>Local-bribes generic instance</title>
         <meta name="description" content="This is local-bribes instance!">
@@ -13,43 +13,7 @@ $controller = new indexController();
         <link href="../css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
         <script src="../js/bootstrap.min.js"></script>
         <!-- Custom -->
-        <style type="text/css">
-  body {
-    padding-top: 20px;
-    padding-bottom: 40px;
-  }
-
-  /* Custom container */
-  .container-narrow {
-    margin: 0 auto;
-    max-width: 700px;
-  }
-  .container-narrow > hr {
-    margin: 30px 0;
-  }
-
-  /* Main marketing message and sign up button */
-  .jumbotron {
-    margin: 60px 0;
-    text-align: center;
-  }
-  .jumbotron h1 {
-    font-size: 72px;
-    line-height: 1;
-  }
-  .jumbotron .btn {
-    font-size: 21px;
-    padding: 14px 24px;
-  }
-
-  /* Supporting marketing content */
-  .marketing {
-    margin: 60px 0;
-  }
-  .marketing p + h4 {
-    margin-top: 28px;
-  }
-        </style>
+        <link href="../css/style.css" rel="stylesheet" media="screen">
 
         <script type="text/javascript">
             function paid() {
@@ -72,15 +36,21 @@ $controller = new indexController();
 
             function hide_both() {
                 document.getElementById("details").style.visibility = 'hidden';
+                document.getElementById("details").style.height = '0px';
                 document.getElementById("amount").style.visibility = 'hidden';
+                document.getElementById("amount").style.height = '0px';
             }
             function show_details() {
                 document.getElementById("details").style.visibility = 'visible';
+                document.getElementById("details").style.height = '';
                 document.getElementById("send_div").style.visibility = 'visible';
+                document.getElementById("send_div").style.height = '';
             }
             function show_amount() {
                 document.getElementById("amount").style.visibility = 'visible';
+                document.getElementById("amount").style.height = '';
                 document.getElementById("send_div").style.visibility = 'visible';
+                document.getElementById("send_div").style.height = '';
             }
             function show_both() {
                 show_details();
@@ -92,11 +62,11 @@ $controller = new indexController();
         <div class="container-narrow">
             <div class="masthead">
                 <ul class="nav nav-pills pull-right">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">Statistics</a></li>
-                    <li><a href="#">Privacy</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li class="active"><a href="<?php echo $_SERVER['HTTP_HOST'] . "/index.php"; ?>">Home</a></li>
+                    <li><a href="<?php echo $_SERVER['HTTP_HOST'] . "/statistics.php"; ?>">Statistics</a></li>
+                    <li><a href="<?php echo $_SERVER['HTTP_HOST'] . "/privacy.php"; ?>">Privacy</a></li>
+                    <li><a href="<?php echo $_SERVER['HTTP_HOST'] . "/about.php"; ?>">About</a></li>
+                    <li><a href="<?php echo $_SERVER['HTTP_HOST'] . "/contact.php"; ?>">Contact</a></li>
                 </ul>
                 <h3 class="muted">Local bribes</h3>
             </div>
@@ -105,12 +75,11 @@ $controller = new indexController();
 
             <div class="jumbotron" style="border: dashed">
                 <h1>Report!</h1>
-                
                 <form id="report_form" action="submit.php" method="post" />
                 
                 <h3>Location</h3>        
                 <input type="text" id="txtLocation" name="txtLocation" 
-                       class="span4" list="locationsList" autocomplete="off"
+                       class="span4" list="locationsList" autocomplete="on"
                        form="report_form"
                        title="Start typing in the name of your city and then choose it from the dropdown." />
                 <datalist id="locationsList">
@@ -126,7 +95,7 @@ $controller = new indexController();
                                 
                 <h3>Institution</h3>
                 <input type="text" id="txtInstitution" name="txtInstitution"
-                       class="span4" list="institutionsList" autocomplete="off"
+                       class="span4" list="institutionsList" autocomplete="on"
                        form="report_form"
                        title="Start typing in the name of the organization and then choose it from the dropdown."/>
                 <datalist id="institutionsList">
@@ -146,23 +115,24 @@ $controller = new indexController();
                 <a class="btn btn-large btn-primary" onclick="honest();">I met an honest officer</a>
                 <input type="hidden" form="report_form" name="eventCode" id="eventField">
 
-                <div id="details" style="visibility: hidden">
+                <div id="details" style="visibility: hidden; height: 0px">
                     <h3>Details</h3>
                     Improve your report adding more details.<br/>
                     <textarea cols=110 rows=6 class="span5" form="report_form"
                               placeholder="Add here a description..."
                               name="details"></textarea>
                 </div>
-                <div id="amount" style="visibility: hidden">
+                <div id="amount" style="visibility: hidden; height: 0px">
                     <label for="amount">Amount paid: </label>
                     <div class="input-prepend">
                         <span class="add-on">USD $</span>
-                        <input class="span2" id="prependedInput" name="amount"
-                               type="text" form="report_form" autocomplete="off">
+                        <input id="prependedInput" name="amount"
+                               type="number" min="0" autocomplete="off"
+                               form="report_form" class="span2">
                     </div>
                 </div>
 
-                <div id="send_div" style="visibility: hidden">
+                <div id="send_div" style="visibility: hidden; height: 0px">
                     <div class="form-actions">
                         <button type="submit" class="btn btn-primary" 
                                 form="report_form" name="formSubmit">
@@ -193,7 +163,7 @@ $controller = new indexController();
                         echo $controller->get_institution_by_id($inst_id);
                         ?>
                         </h4>
-                    <div><b><?php echo $report["amount"] ?></b> on <?php echo $report["date"] ?> </div>
+                    <div>&#x24; <?php echo $report["amount"] ?> &#x1f4c5; <?php echo $report["date"] ?> &#x2316; <?php echo $controller->get_full_location_by_id($report["location"]); ?></div>
                         <?php
                         echo "<p>" . $report["description"] . "</p>\n";
                     }
