@@ -41,6 +41,7 @@ $controller = new indexController();
                 document.getElementById("details").style.height = '0px';
                 document.getElementById("amount").style.visibility = 'hidden';
                 document.getElementById("amount").style.height = '0px';
+                document.getElementById("prependedInput").value = '0';
             }
             function show_details() {
                 document.getElementById("details").style.visibility = 'visible';
@@ -64,11 +65,11 @@ $controller = new indexController();
         <div class="container-narrow">
             <div class="masthead">
                 <ul class="nav nav-pills pull-right">
-                    <li class="active"><a href="<?php echo $_SERVER['HTTP_HOST'] . "/index.php"; ?>">Home</a></li>
-                    <li><a href="<?php echo $_SERVER['HTTP_HOST'] . "/statistics.php"; ?>">Statistics</a></li>
-                    <li><a href="<?php echo $_SERVER['HTTP_HOST'] . "/privacy.php"; ?>">Privacy</a></li>
-                    <li><a href="<?php echo $_SERVER['HTTP_HOST'] . "/about.php"; ?>">About</a></li>
-                    <li><a href="<?php echo $_SERVER['HTTP_HOST'] . "/contact.php"; ?>">Contact</a></li>
+                    <li class="active"><a href="<?php echo $_SERVER['HTTP_HOST'] . "/index.php"; ?>"><i class="fa fa-home fa-1x"></i>&nbsp;Home</a></li>
+                    <li><a href="<?php echo $_SERVER['HTTP_HOST'] . "/statistics.php"; ?>"><i class="fa fa-bar-chart fa-1x"></i>&nbsp;Statistics</a></li>
+                    <li><a href="<?php echo $_SERVER['HTTP_HOST'] . "/privacy.php"; ?>"><i class="fa fa-user-secret fa-1x"></i>&nbsp;Privacy</a></li>
+                    <li><a href="<?php echo $_SERVER['HTTP_HOST'] . "/about.php"; ?>"><i class="fa fa-info fa-1x"></i>&nbsp;About</a></li>
+                    <li><a href="<?php echo $_SERVER['HTTP_HOST'] . "/contact.php"; ?>"><i class="fa fa-pencil fa-1x"></i>&nbsp;Contact</a></li>
                 </ul>
                 <h3 class="muted">Local bribes</h3>
             </div>
@@ -152,11 +153,13 @@ $controller = new indexController();
                 <div>
                     <?php
                     foreach($reports as $report) {
+                        $paid=False;
                         $inst_id = $report["institution"];
                         ?>
                         <h4 class="<?php 
                             switch($report["event"]){
-                                case 1: echo "btn-danger"; break; //Paid
+                                case 1: echo "btn-danger"; $paid=True; 
+                                        break; //Paid
                                 case 2: echo "btn-success"; break; //Did not pay
                                 case 3: echo "btn-primary"; break; //Honest
                             }?>"
@@ -166,12 +169,16 @@ $controller = new indexController();
                         ?>
                         </h4>
                     <div>
-                        <i class="fa fa-usd fa-1x"></i>
-                        <?php echo $report["amount"] ?>
-                        <i class="fa fa-calendar fa-1x"></i>
-                        <?php echo explode(" ", $report["date"])[0]; ?>
-                        <i class="fa fa-map-marker fa-1x"></i>
-                        <?php echo $controller->get_full_location_by_id($report["location"]); ?>
+                            <i class="fa fa-calendar fa-1x"></i>
+                            <?php echo explode(" ", $report["date"])[0]; ?>
+
+                            <i class="fa fa-map-marker fa-1x" style="padding-left:20px"></i>
+                            <?php echo $controller->get_full_location_by_id($report["location"]); ?>
+
+                        <?php if($paid) { ?>
+                            <i class="fa fa-usd fa-1x" style="padding-left:20px"></i>
+                            <?php echo $report["amount"];
+                        } ?>
                     </div>
                         <?php
                         echo "<p>" . $report["description"] . "</p>\n";

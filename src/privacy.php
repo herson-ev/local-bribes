@@ -10,23 +10,25 @@
         <script src="../js/bootstrap.min.js"></script>
         <!-- Custom -->
         <link href="../css/style.css" rel="stylesheet" media="screen">
+        <!-- Fontawesome -->
+        <link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
     </head>
 <body>
     <div class="container-narrow">
         <div class="masthead">
             <ul class="nav nav-pills pull-right">
-                <li><a href="<?php echo $_SERVER['HTTP_HOST'] . "/index.php"; ?>">Home</a></li>
-                <li><a href="<?php echo $_SERVER['HTTP_HOST'] . "/statistics.php"; ?>">Statistics</a></li>
-                <li class="active"><a href="<?php echo $_SERVER['HTTP_HOST'] . "/privacy.php"; ?>">Privacy</a></li>
-                <li><a href="<?php echo $_SERVER['HTTP_HOST'] . "/about.php"; ?>">About</a></li>
-                <li><a href="<?php echo $_SERVER['HTTP_HOST'] . "/contact.php"; ?>">Contact</a></li>
+                <li><a href="<?php echo $_SERVER['HTTP_HOST'] . "/index.php"; ?>"><i class="fa fa-home fa-1x"></i>&nbsp;Home</a></li>
+                <li><a href="<?php echo $_SERVER['HTTP_HOST'] . "/statistics.php"; ?>"><i class="fa fa-bar-chart fa-1x"></i>&nbsp;Statistics</a></li>
+                <li class="active"><a href="<?php echo $_SERVER['HTTP_HOST'] . "/privacy.php"; ?>"><i class="fa fa-user-secret fa-1x"></i>&nbsp;Privacy</a></li>
+                <li><a href="<?php echo $_SERVER['HTTP_HOST'] . "/about.php"; ?>"><i class="fa fa-info fa-1x"></i>&nbsp;About</a></li>
+                <li><a href="<?php echo $_SERVER['HTTP_HOST'] . "/contact.php"; ?>"><i class="fa fa-pencil fa-1x"></i>&nbsp;Contact</a></li>
             </ul>
             <h3 class="muted">Local bribes</h3>
         </div>
 
         <hr>
 
-        <div class="jumbotron" >
+        <div class="jumbotrin" >
             <h2>Privacy</h2>
             <div><p>Explain here the privacy policy you are going to apply in your instance.</p>
                 <ul>
