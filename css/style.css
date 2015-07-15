@@ -22,6 +22,12 @@ body {
     margin: 60px 0;
     text-align: center;
 }
+
+.jumbotrin {
+    margin: 60px 0;
+    text-align: left;
+}
+
 .jumbotron h1 {
     font-size: 72px;
     line-height: 1;
