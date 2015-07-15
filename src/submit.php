@@ -8,6 +8,7 @@ include_once("classes/report.php");
         <title>Local-bribes generic instance</title>
         <meta name="description" content="This is local-bribes instance!">
         <meta name="author" content="Herson Esquivel Vargas">
+        <meta http-equiv="refresh" content="3; URL=<?php echo $_SERVER['HTTP_HOST'] . "/index.php"; ?>">
         <!-- Bootstrap -->
         <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="../css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
