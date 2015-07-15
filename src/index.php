@@ -14,6 +14,8 @@ $controller = new indexController();
         <script src="../js/bootstrap.min.js"></script>
         <!-- Custom -->
         <link href="../css/style.css" rel="stylesheet" media="screen">
+        <!-- Fontawesome -->
+        <link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
 
         <script type="text/javascript">
             function paid() {
@@ -163,7 +165,14 @@ $controller = new indexController();
                         echo $controller->get_institution_by_id($inst_id);
                         ?>
                         </h4>
-                    <div>&#x24; <?php echo $report["amount"] ?> &#x1f4c5; <?php echo $report["date"] ?> &#x2316; <?php echo $controller->get_full_location_by_id($report["location"]); ?></div>
+                    <div>
+                        <i class="fa fa-usd fa-1x"></i>
+                        <?php echo $report["amount"] ?>
+                        <i class="fa fa-calendar fa-1x"></i>
+                        <?php echo explode(" ", $report["date"])[0]; ?>
+                        <i class="fa fa-map-marker fa-1x"></i>
+                        <?php echo $controller->get_full_location_by_id($report["location"]); ?>
+                    </div>
                         <?php
                         echo "<p>" . $report["description"] . "</p>\n";
                     }
