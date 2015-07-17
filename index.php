@@ -1,5 +1,5 @@
 <?php
-include_once("controllers/indexController.php");
+include_once("src/controllers/indexController.php");
 $controller = new indexController();
 ?>
 <!DOCTYPE html>
@@ -9,13 +9,13 @@ $controller = new indexController();
         <meta name="description" content="This is local-bribes instance!">
         <meta name="author" content="Herson Esquivel Vargas">
         <!-- Bootstrap -->
-        <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
-        <link href="../css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
-        <script src="../js/bootstrap.min.js"></script>
+        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link href="css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+        <script src="js/bootstrap.min.js"></script>
         <!-- Custom -->
-        <link href="../css/style.css" rel="stylesheet" media="screen">
+        <link href="css/style.css" rel="stylesheet" media="screen">
         <!-- Fontawesome -->
-        <link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 
         <script type="text/javascript">
             function paid() {
@@ -65,11 +65,11 @@ $controller = new indexController();
         <div class="container-narrow">
             <div class="masthead">
                 <ul class="nav nav-pills pull-right">
-                    <li class="active"><a href="<?php echo $_SERVER['HTTP_HOST'] . "/index.php"; ?>"><i class="fa fa-home fa-1x"></i>&nbsp;Home</a></li>
-                    <li><a href="<?php echo $_SERVER['HTTP_HOST'] . "/statistics.php"; ?>"><i class="fa fa-bar-chart fa-1x"></i>&nbsp;Statistics</a></li>
-                    <li><a href="<?php echo $_SERVER['HTTP_HOST'] . "/privacy.php"; ?>"><i class="fa fa-user-secret fa-1x"></i>&nbsp;Privacy</a></li>
-                    <li><a href="<?php echo $_SERVER['HTTP_HOST'] . "/about.php"; ?>"><i class="fa fa-info fa-1x"></i>&nbsp;About</a></li>
-                    <li><a href="<?php echo $_SERVER['HTTP_HOST'] . "/contact.php"; ?>"><i class="fa fa-pencil fa-1x"></i>&nbsp;Contact</a></li>
+                    <li class="active"><a href="<?php echo "/index.php"; ?>"><i class="fa fa-home fa-1x"></i>&nbsp;Home</a></li>
+                    <li><a href="<?php echo "/statistics.php"; ?>"><i class="fa fa-bar-chart fa-1x"></i>&nbsp;Statistics</a></li>
+                    <li><a href="<?php echo "/privacy.php"; ?>"><i class="fa fa-user-secret fa-1x"></i>&nbsp;Privacy</a></li>
+                    <li><a href="<?php echo "/about.php"; ?>"><i class="fa fa-info fa-1x"></i>&nbsp;About</a></li>
+                    <li><a href="<?php echo "/contact.php"; ?>"><i class="fa fa-pencil fa-1x"></i>&nbsp;Contact</a></li>
                 </ul>
                 <h3 class="muted">Local bribes</h3>
             </div>
@@ -83,7 +83,7 @@ $controller = new indexController();
                 <h3>Location</h3>        
                 <input type="text" id="txtLocation" name="txtLocation" 
                        class="span4" list="locationsList" autocomplete="on"
-                       form="report_form"
+                       form="report_form" required
                        title="Start typing in the name of your city and then choose it from the dropdown." />
                 <datalist id="locationsList">
                     <?php
@@ -99,7 +99,7 @@ $controller = new indexController();
                 <h3>Institution</h3>
                 <input type="text" id="txtInstitution" name="txtInstitution"
                        class="span4" list="institutionsList" autocomplete="on"
-                       form="report_form"
+                       form="report_form" required
                        title="Start typing in the name of the organization and then choose it from the dropdown."/>
                 <datalist id="institutionsList">
                     <?php
@@ -141,7 +141,7 @@ $controller = new indexController();
                                 form="report_form" name="formSubmit">
                                 Send report!
                         </button>
-                        <button type="button" class="btn">Cancel</button>
+                        <button type="reset" class="btn">Cancel</button>
                     </div>
                 </div>
             </div>
