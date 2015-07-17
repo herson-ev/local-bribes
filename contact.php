@@ -5,23 +5,23 @@
         <meta name="description" content="This is local-bribes instance!">
         <meta name="author" content="Herson Esquivel Vargas">
         <!-- Bootstrap -->
-        <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen">
-        <link href="../css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
-        <script src="../js/bootstrap.min.js"></script>
+        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link href="css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+        <script src="js/bootstrap.min.js"></script>
         <!-- Custom -->
-        <link href="../css/style.css" rel="stylesheet" media="screen">
+        <link href="css/style.css" rel="stylesheet" media="screen">
         <!-- Fontawesome -->
-        <link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
 </head>
 <body>
     <div class="container-narrow">
         <div class="masthead">
             <ul class="nav nav-pills pull-right">
-                <li><a href="<?php echo $_SERVER['HTTP_HOST'] . "/index.php";  ?>"><i class="fa fa-home fa-1x"></i>&nbsp;Home</a></li>
-                <li><a href="<?php echo $_SERVER['HTTP_HOST'] . "/statistics.php"; ?>"><i class="fa fa-bar-chart fa-1x"></i>&nbsp;Statistics</a></li>
-                <li><a href="<?php echo $_SERVER['HTTP_HOST'] . "/privacy.php"; ?>"><i class="fa fa-user-secret fa-1x"></i>&nbsp;Privacy</a></li>
-                <li><a href="<?php echo $_SERVER['HTTP_HOST'] . "/about.php"; ?>"><i class="fa fa-info fa-1x"></i>&nbsp;About</a></li>
-                <li class="active"><a href="<?php echo $_SERVER['HTTP_HOST'] . "/contact.php"; ?>"><i class="fa fa-pencil fa-1x"></i>&nbsp;Contact</a></li>
+                <li><a href="<?php echo "/index.php";  ?>"><i class="fa fa-home fa-1x"></i>&nbsp;Home</a></li>
+                <li><a href="<?php echo "/statistics.php"; ?>"><i class="fa fa-bar-chart fa-1x"></i>&nbsp;Statistics</a></li>
+                <li><a href="<?php echo "/privacy.php"; ?>"><i class="fa fa-user-secret fa-1x"></i>&nbsp;Privacy</a></li>
+                <li><a href="<?php echo "/about.php"; ?>"><i class="fa fa-info fa-1x"></i>&nbsp;About</a></li>
+                <li class="active"><a href="<?php echo "/contact.php"; ?>"><i class="fa fa-pencil fa-1x"></i>&nbsp;Contact</a></li>
             </ul>
             <h3 class="muted">Local bribes</h3>
         </div>
