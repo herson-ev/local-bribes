@@ -1,5 +1,5 @@
 <?php
-include_once("classes/db.php");
+include_once("src/classes/db.php");
 
 /**
  * Description of submitController
@@ -48,11 +48,18 @@ class submitController {
         
         if(count($errors_array) == 0) {
             $this->db->save_report($valid_location, $valid_institution, 
-                    $report->get_event(), $report->get_description(),
+                    $report->get_event(), $this->sanitize($report->get_description()),
                     $report->get_amount());
         }
         
         return $errors_array;
+    }
+    
+    private function sanitize($text) {
+        $return_str = str_replace(array('<', '>', "'", '"', ')', '('), 
+                array('&lt;', '&gt;', '&apos;', '&#x22;', '&#x29;', '&#x28;'), 
+                $text, $counter);
+        return $return_str;
     }
     
     /*
@@ -92,32 +99,27 @@ class submitController {
         if(gettype($event_code) == "integer") {
             //Range of events [1,2,3] for ["paid", "not paid", "honest officer"]
             if ($event_code >= 1 && $event_code <= 3) {
-                return true;
+                return True;
             }
         }
         return "The event is invalid.";
     }
     
     /*
-     * If it is fine, returns true.
+     * If it is fine, returns True.
      * If it is wrong, returns a string explaining the error.
      */
     private function validate_description($description) {
         $error_msg = "The description is invalid.";
         $counter = 0;
-        $return_str = str_replace(array('<', '>', "'", '"', ')', '('), 
-                array('&lt;', '&gt;', '&apos;', '&#x22;', '&#x29;', '&#x28;'), 
-                $description, $counter);
+
+        $return_str = str_ireplace(array(' ', ' '), '', $description, $foo);
+        $return_str = str_ireplace('script', '', $return_str, $counter);
         if ($counter > 0) {
             return $error_msg;
         }
 
-        $return_str = str_ireplace('%3Cscript', '', $return_str, $counter);
-        if ($counter > 0) {
-            return $error_msg;
-        }
-
-        return true;
+        return True;
     }
     
     /*
@@ -126,7 +128,7 @@ class submitController {
      */
     private function validate_amount($amount) {
         if (gettype($amount) == "integer" || gettype($amount) == "double") {
-            return true;
+            return True;
         }
         return "The amount is invalid.";
     }
