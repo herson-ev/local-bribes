@@ -7,10 +7,10 @@ include_once("report.php");
  * @author herson
  */
 class Db {
-    private $database_name = "";
-    private $database_server = "";
-    private $database_user = "";
-    private $database_pass = "";
+    private $database_name = "bribes";
+    private $database_server = "localhost";
+    private $database_user = "bribes";
+    private $database_pass = "bribes";
     private $mysqli;
 
     public function __construct() {
@@ -46,7 +46,7 @@ class Db {
     /**
      *
      * @param type $id (integer) of the location we are looking for.
-     * @return type (string) location name or null if not found.
+     * @return type (id, parent, name) location or null if not found.
      */
     public function get_location_by_id($id) {
         $query_txt = "SELECT id, parent, name FROM location WHERE id = ?";
@@ -193,7 +193,101 @@ class Db {
             $stmt->close();
         }
         return $result_array;
+    }
+    
+    /**
+     * 
+     * @return type (integer) how many reports have been registered so far.
+     * Used in statistics.php
+     */
+    public function get_total_reports() {
+        $query_txt = "SELECT count(*) FROM report";
+        if (!$result = $this->mysqli->query($query_txt)) {
+            die("There was an error counting reports.");
+        }        
+        $row = $result->fetch_row();
+        return $row[0];
+    }
+    
+    public function get_total_cities() {
+        $query_txt = "SELECT count(*) AS total from (SELECT location FROM "
+                . "report GROUP BY location) AS locations";
+        if (!$result = $this->mysqli->query($query_txt)) {
+            die("There was an error counting locations.");
+        }        
+        $row = $result->fetch_row();
+        return $row[0];
+    }
+    
+    public function get_total_institutions() {
+        $query_txt = "SELECT count(*) AS total from (SELECT institution FROM "
+                . "report GROUP BY location) AS institutions";
+        if (!$result = $this->mysqli->query($query_txt)) {
+            die("There was an error counting institutions.");
+        }        
+        $row = $result->fetch_row();
+        return $row[0];
     }    
+    public function get_total_amount() {
+        $query_txt = "SELECT SUM(amount) FROM report";
+        if (!$result = $this->mysqli->query($query_txt)) {
+            die("There was an error computing the total amount of bribes.");
+        }        
+        $row = $result->fetch_row();
+        return $row[0];
+    }    
+    public function get_total_bribes() {
+        $query_txt = "SELECT count(*) AS total from (SELECT id FROM "
+                . "report WHERE event=1) AS bribes";
+        if (!$result = $this->mysqli->query($query_txt)) {
+            die("There was an error computing the total amount of bribes.");
+        }        
+        $row = $result->fetch_row();
+        return $row[0];
+    }
+    public function get_total_not_bribes() {
+        $query_txt = "SELECT count(*) AS total from (SELECT id FROM "
+                . "report WHERE event=2) AS bribes";
+        if (!$result = $this->mysqli->query($query_txt)) {
+            die("There was an error computing the total amount of bribes.");
+        }        
+        $row = $result->fetch_row();
+        return $row[0];
+    }
+    public function get_total_honest() {
+        $query_txt = "SELECT count(*) AS total from (SELECT id FROM "
+                . "report WHERE event=3) AS bribes";
+        if (!$result = $this->mysqli->query($query_txt)) {
+            die("There was an error computing the total amount of bribes.");
+        }        
+        $row = $result->fetch_row();
+        return $row[0];
+    }
+    
+    /**
+     * 
+     * @param type $number (integer) Top "n"
+     * @return Top "n" of institutions by event (1-paid, 2-not paid or 3-honest)
+     */
+    public function get_top_institution_by_event($event, $number) {
+        $result_array = array();
+        $query_txt = "SELECT institution, count(*) AS numb FROM report WHERE "
+                . "event=? GROUP BY institution ORDER BY numb DESC LIMIT ?";
+        
+        $stmt = $this->mysqli->stmt_init();
+        if ($stmt->prepare($query_txt)) {
+            $stmt->bind_param("ii", $event, $number);
+            $stmt->execute();
+            
+            $stmt->bind_result($inst, $bribes);
+            while($stmt->fetch()) {
+                array_push($result_array, 
+                        array("institution" => $inst, "times" => $bribes));
+            }
+            $stmt->close();
+        }
+        return $result_array;
+    }
 
     /**
      * TODO: set limits to the description (words? characters?)
