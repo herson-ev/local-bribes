@@ -269,7 +269,7 @@ class Db {
      * @param type $number (integer) Top "n"
      * @return Top "n" of institutions by event (1-paid, 2-not paid or 3-honest)
      */
-    public function get_top_institution_by_event($event, $number) {
+    public function get_top_institutions_by_event($event, $number) {
         $result_array = array();
         $query_txt = "SELECT institution, count(*) AS numb FROM report WHERE "
                 . "event=? GROUP BY institution ORDER BY numb DESC LIMIT ?";
@@ -288,6 +288,33 @@ class Db {
         }
         return $result_array;
     }
+    
+    /**
+     * 
+     * @param type $number (integer) Top "n"
+     * @return Top "n" of institutions by location.
+     */
+    public function get_top_locations_by_event($event, $number) {
+        $result_array = array();
+        $query_txt = "SELECT location, count(*) AS numb FROM report WHERE "
+                . "event=? GROUP BY location ORDER BY numb DESC LIMIT ?";
+        
+        $stmt = $this->mysqli->stmt_init();
+        if ($stmt->prepare($query_txt)) {
+            $stmt->bind_param("ii", $event, $number);
+            $stmt->execute();
+            
+            $stmt->bind_result($loc, $bribes);
+            while($stmt->fetch()) {
+                array_push($result_array, 
+                        array("location" => $loc, "times" => $bribes));
+            }
+            $stmt->close();
+        }
+        return $result_array;
+    }
+    
+    
 
     /**
      * TODO: set limits to the description (words? characters?)
