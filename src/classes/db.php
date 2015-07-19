@@ -7,10 +7,10 @@ include_once("report.php");
  * @author herson
  */
 class Db {
-    private $database_name = "bribes";
-    private $database_server = "localhost";
-    private $database_user = "bribes";
-    private $database_pass = "bribes";
+    private $database_name = "";
+    private $database_server = "";
+    private $database_user = "";
+    private $database_pass = "";
     private $mysqli;
 
     public function __construct() {
