@@ -38,7 +38,9 @@
                 This is important to guarantee an acceptable level of privacy to the users.</p>
                 <p>The software is still in development. If you want to support it, please consider donating (in bitcoins) to 
                     <b>1FmwWP4FeUMTHCvMtmxZCCsA4nfj3kfTmg</b></p>
+                <p>Icons by <a href="http://fontawesome.io/">Font Awesome</a>, CSS by <a href="http://getbootstrap.com/">Bootstrap</a> and Graphs by <a href="http://d3js.org/">Data Driven Documents</a>.</p>
             </div>
+                
         </div>
 
         <hr>
