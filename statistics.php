@@ -26,8 +26,8 @@ $top_honest_by_location = $controller->get_top_honest_by_location();
 <!DOCTYPE html>
 <html lang="en">  
     <head>
-        <title>Local-bribes generic instance</title>
-        <meta name="description" content="This is local-bribes instance!">
+        <title>Mordidas.cr</title>
+        <meta name="description" content="Mordidas.cr es una aplicación de denuncia ciudadana.">
         <meta name="author" content="Herson Esquivel Vargas">
         <!-- Bootstrap -->
         <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
@@ -155,27 +155,27 @@ $top_honest_by_location = $controller->get_top_honest_by_location();
         <div class="container-narrow">
             <div class="masthead">
                 <ul class="nav nav-pills pull-right">
-                    <li><a href="<?php echo "/index.php"; ?>"><i class="fa fa-home fa-1x"></i>&nbsp;Home</a></li>
-                    <li class="active"><a href="<?php echo "/statistics.php"; ?>"><i class="fa fa-bar-chart fa-1x"></i>&nbsp;Statistics</a></li>
-                    <li><a href="<?php echo "/privacy.php"; ?>"><i class="fa fa-user-secret fa-1x"></i>&nbsp;Privacy</a></li>
-                    <li><a href="<?php echo "/about.php"; ?>"><i class="fa fa-info fa-1x"></i>&nbsp;About</a></li>
-                    <li><a href="<?php echo "/contact.php"; ?>"><i class="fa fa-pencil fa-1x"></i>&nbsp;Contact</a></li>
+                    <li><a href="<?php echo "/index.php"; ?>"><i class="fa fa-home fa-1x"></i>&nbsp;Inicio</a></li>
+                    <li class="active"><a href="<?php echo "/statistics.php"; ?>"><i class="fa fa-bar-chart fa-1x"></i>&nbsp;Estad&iacute;sticas</a></li>
+                    <li><a href="<?php echo "/privacy.php"; ?>"><i class="fa fa-user-secret fa-1x"></i>&nbsp;Privacidad</a></li>
+                    <li><a href="<?php echo "/about.php"; ?>"><i class="fa fa-info fa-1x"></i>&nbsp;Acerca de</a></li>
+                    <li><a href="<?php echo "/contact.php"; ?>"><i class="fa fa-pencil fa-1x"></i>&nbsp;Contacto</a></li>
                 </ul>
-                <h3 class="muted">Local bribes</h3>
+                <h3 class="muted">Mordidas.cr</h3>
             </div>
 
             <hr>
 
             <div class="jumbotrin" >
-                <h2>Statistics</h2>
-                <h3>Overview</h3>
+                <h2>Estad&iacute;sticas</h2>
+                <h3>Resumen</h3>
                 <div>
                     <table class="table table-bordered">
                         <tr>  
-                            <th>Reports</th>
-                            <th>Cities</th>
-                            <th>Institutions</th>
-                            <th>US Dollars</th>
+                            <th>Reportes</th>
+                            <th>Ciudades</th>
+                            <th>Instituciones</th>
+                            <th>CRC &#8353;</th>
                         </tr>
                         <tr>
                             <td><?php echo $total_reports; ?></td>
@@ -187,9 +187,9 @@ $top_honest_by_location = $controller->get_top_honest_by_location();
 
                     <table class="table table-bordered">
                         <tr>  
-                            <th class="alert-danger">Bribes paid</th>
-                            <th class="alert-success">Bribes not paid</th>
-                            <th class="alert-info">Honest officers</th>
+                            <th class="alert-danger">Mordidas pagadas</th>
+                            <th class="alert-success">Mordidas no pagadas</th>
+                            <th class="alert-info">Funcionarios honestos</th>
                         </tr>
                         <tr>
                             <td><?php echo $total_bribes; ?></td>
@@ -223,13 +223,13 @@ function getData(){
                     </table>
                 </div><!-- ends div overview -->
                     
-                <h3>Institutions</h3>
+                <h3>Instituciones</h3>
                 <div class="row">
                 <div class="span6">
                 <ul class="nav nav-tabs">
-                    <li id='inst_bribes_content_li'><a href="javascript:show_inst('inst_bribes_content');" style="color: #b94a48; font-weight: bold">Bribes paid</a></li>
-                <li id='inst_not_bribes_content_li'><a href="javascript:show_inst('inst_not_bribes_content');" style="color: #468847; font-weight: bold">Bribes not paid</a></li>
-                <li id='inst_honest_content_li'><a href="javascript:show_inst('inst_honest_content');" style="color: #3a87ad; font-weight: bold">Honest officers</a></li>
+                    <li id='inst_bribes_content_li'><a href="javascript:show_inst('inst_bribes_content');" style="color: #b94a48; font-weight: bold">Mordidas pagadas</a></li>
+                <li id='inst_not_bribes_content_li'><a href="javascript:show_inst('inst_not_bribes_content');" style="color: #468847; font-weight: bold">Mordidas no pagadas</a></li>
+                <li id='inst_honest_content_li'><a href="javascript:show_inst('inst_honest_content');" style="color: #3a87ad; font-weight: bold">Funcionarios honestos</a></li>
                 </ul>
                 </div>
                 </div>
@@ -239,8 +239,8 @@ function getData(){
                     <table class="table table-bordered">
                         <tr>
                             <th>#</th>
-                            <th>Institution</th>
-                            <th>Reports</th>
+                            <th>Instituci&oacute;n</th>
+                            <th>Reportes</th>
                         </tr>
                         <?php
                         $counter = 1;
@@ -276,8 +276,8 @@ draw_bar_graph(c, inst_bribes_data);
                     <table class="table table-bordered">
                         <tr>
                             <th>#</th>
-                            <th>Institution</th>
-                            <th>Reports</th>
+                            <th>Instituci&oacute;n</th>
+                            <th>Reportes</th>
                         </tr>
                         <?php
                         $counter = 1;
@@ -314,8 +314,8 @@ draw_bar_graph(c, inst_not_bribes_data);
                     <table class="table table-bordered">
                         <tr>
                             <th>#</th>
-                            <th>Institution</th>
-                            <th>Reports</th>
+                            <th>Instituci&oacute;n</th>
+                            <th>Reportes</th>
                         </tr>
                         <?php
                         $counter = 1;
@@ -359,13 +359,13 @@ draw_bar_graph(c, inst_honest_data);
                 
                 
                 
-                <h3>Locations</h3>
+                <h3>Ciudades</h3>
                 <div class="row">
                 <div class="span6">
                 <ul class="nav nav-tabs">
-                <li id='loc_bribes_content_li'><a href="javascript:show_loc('loc_bribes_content');" style="color: #b94a48; font-weight: bold">Bribes paid</a></li>
-                <li id='loc_not_bribes_content_li'><a href="javascript:show_loc('loc_not_bribes_content');" style="color: #468847; font-weight: bold">Bribes not paid</a></li>
-                <li id='loc_honest_content_li'><a href="javascript:show_loc('loc_honest_content');" style="color: #3a87ad; font-weight: bold">Honest officers</a></li>
+                <li id='loc_bribes_content_li'><a href="javascript:show_loc('loc_bribes_content');" style="color: #b94a48; font-weight: bold">Mordidas pagadas</a></li>
+                <li id='loc_not_bribes_content_li'><a href="javascript:show_loc('loc_not_bribes_content');" style="color: #468847; font-weight: bold">Mordidas no pagadas</a></li>
+                <li id='loc_honest_content_li'><a href="javascript:show_loc('loc_honest_content');" style="color: #3a87ad; font-weight: bold">Funcionarios honestos</a></li>
                 </ul>
                 </div>
                 </div>
@@ -375,8 +375,8 @@ draw_bar_graph(c, inst_honest_data);
                     <table class="table table-bordered">
                         <tr>
                             <th>#</th>
-                            <th>Location</th>
-                            <th>Reports</th>
+                            <th>Ubicaci&oacute;n</th>
+                            <th>Reportes</th>
                         </tr>
                         <?php
                         $counter = 1;
@@ -412,8 +412,8 @@ draw_bar_graph(c, loc_bribes_data);
                     <table class="table table-bordered">
                         <tr>
                             <th>#</th>
-                            <th>Location</th>
-                            <th>Reports</th>
+                            <th>Ubicaci&oacute;n</th>
+                            <th>Reportes</th>
                         </tr>
                         <?php
                         $counter = 1;
@@ -450,8 +450,8 @@ draw_bar_graph(c, loc_not_bribes_data);
                     <table class="table table-bordered">
                         <tr>
                             <th>#</th>
-                            <th>Location</th>
-                            <th>Reports</th>
+                            <th>Ubicaci&oacute;n</th>
+                            <th>Reportes</th>
                         </tr>
                         <?php
                         $counter = 1;
@@ -488,7 +488,7 @@ draw_bar_graph(c, loc_honest_data);
 
             <hr>
             <div class="footer">
-                <p>Local bribes is Free Software <a href="http://www.gnu.org/licenses/gpl.html">GPL v3</a>.</p>
+                <p>Mordidas.cr es Software Libre <a href="http://www.gnu.org/licenses/gpl.html">GPL v3</a> disponible en <a href="https://github.com/herson-ev/local-bribes">GitHub</a>.</p>
             </div>
         </div><!-- /container -->
     </body>

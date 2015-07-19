@@ -5,8 +5,8 @@ include_once("src/classes/report.php");
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Local-bribes generic instance</title>
-        <meta name="description" content="This is local-bribes instance!">
+        <title>Mordidas.cr</title>
+        <meta name="description" content="Mordidas.cr es una aplicación de denuncia ciudadana.">
         <meta name="author" content="Herson Esquivel Vargas">
         <meta http-equiv="refresh" content="3; URL=<?php echo "/index.php"; ?>">
         <!-- Bootstrap -->
@@ -22,20 +22,18 @@ include_once("src/classes/report.php");
     <div class="container-narrow">
         <div class="masthead">
             <ul class="nav nav-pills pull-right">
-                <li><a href="<?php echo "/index.php"; ?>"><i class="fa fa-home fa-1x"></i>&nbsp;Home</a></li>
-                <li><a href="<?php echo "/statistics.php"; ?>"><i class="fa fa-bar-chart fa-1x"></i>&nbsp;Statistics</a></li>
-                <li><a href="<?php echo "/privacy.php"; ?>"><i class="fa fa-user-secret fa-1x"></i>&nbsp;Privacy</a></li>
-                <li><a href="<?php echo "/about.php"; ?>"><i class="fa fa-info fa-1x"></i>&nbsp;About</a></li>
-                <li><a href="<?php echo "/contact.php"; ?>"><i class="fa fa-pencil fa-1x"></i>&nbsp;Contact</a></li>
+                <li><a href="<?php echo "/index.php"; ?>"><i class="fa fa-home fa-1x"></i>&nbsp;Inicio</a></li>
+                <li><a href="<?php echo "/statistics.php"; ?>"><i class="fa fa-bar-chart fa-1x"></i>&nbsp;Estad&iacute;sticas</a></li>
+                <li><a href="<?php echo "/privacy.php"; ?>"><i class="fa fa-user-secret fa-1x"></i>&nbsp;Privacidad</a></li>
+                <li><a href="<?php echo "/about.php"; ?>"><i class="fa fa-info fa-1x"></i>&nbsp;Acerca de</a></li>
+                <li><a href="<?php echo "/contact.php"; ?>"><i class="fa fa-pencil fa-1x"></i>&nbsp;Contacto</a></li>
             </ul>
-            <h3 class="muted">Local bribes</h3>
+            <h3 class="muted">Mordidas.cr</h3>
         </div>
 
         <hr>
 
-        <div class="jumbotron" style="border: dashed">
-            <h1>Thank you!</h1>
-            <h3>Your report has been submited.</h3>
+        <div class="jumbotron" style="border: dashed">            
             <?php
             $txt_location = $_POST['txtLocation'];
             $txt_institution = $_POST['txtInstitution'];
@@ -48,17 +46,23 @@ include_once("src/classes/report.php");
             
 
             $errors_array = $controller->save_report_object($report);
-            if(count($errors_array) > 0) {
+            if(count($errors_array) > 0) {?>
+                <h1>&#9785; Error al enviar el reporte.</h1>
+                <?php
                 foreach ($errors_array as $error) {
-                    echo $error . '\n';
+                    echo $error . '<br>';
                 }
+            } else {?>
+                <h1>Gracias.</h1>
+                <h3>Su reporte ha sido enviado.</h3>
+            <?php
             }
             ?> 
         </div>
 
         <hr>
         <div class="footer">
-            <p>Local bribes is Free Software <a href="http://www.gnu.org/licenses/gpl.html">GPL v3</a>.</p>
+            <p>Mordidas.cr es Software Libre <a href="http://www.gnu.org/licenses/gpl.html">GPL v3</a> disponible en <a href="https://github.com/herson-ev/local-bribes">GitHub</a>.</p>
         </div>
     </div><!-- /container -->
 </body>
