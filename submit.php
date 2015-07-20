@@ -6,6 +6,7 @@ include_once("src/classes/report.php");
 <html lang="en">
     <head>
         <title>Local-bribes generic instance</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="description" content="This is local-bribes instance!">
         <meta name="author" content="Herson Esquivel Vargas">
         <meta http-equiv="refresh" content="3; URL=<?php echo "/index.php"; ?>">

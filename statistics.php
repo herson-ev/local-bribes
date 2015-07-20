@@ -27,6 +27,7 @@ $top_honest_by_location = $controller->get_top_honest_by_location();
 <html lang="en">  
     <head>
         <title>Local-bribes generic instance</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="description" content="This is local-bribes instance!">
         <meta name="author" content="Herson Esquivel Vargas">
         <!-- Bootstrap -->
