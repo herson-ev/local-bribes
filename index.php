@@ -6,6 +6,7 @@ $controller = new indexController();
 <html lang="en">
     <head>
         <title>Mordidas.cr</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="description" content="Mordidas.cr es una aplicación de denuncia ciudadana.">
         <meta name="author" content="Herson Esquivel Vargas">
         <!-- Bootstrap -->
@@ -77,7 +78,7 @@ $controller = new indexController();
             <hr>
 
             <div class="jumbotron" style="border: dashed">
-                <h1>¡Reporte!</h1>
+                <h1>&#xa1Reporte!</h1>
                 <form id="report_form" action="submit.php" method="post" />
                 
                 <h3>Ubicaci&oacute;n</h3>        
@@ -112,7 +113,7 @@ $controller = new indexController();
                     ?>
                 </datalist>
                 
-                <h3>¿Qu&eacute; ocurri&oacute;?</h3>
+                <h3>&#xbfQu&eacute; ocurri&oacute;?</h3>
                 <a class="btn btn-large btn-danger" onclick="paid();" id="btn_bribe">Pagu&eacute; una mordida</a>
                 <a class="btn btn-large btn-success" onclick="not_paid();" id="btn_not_bribe">Me negu&eacute; a pagar</a>
                 <a class="btn btn-large btn-primary" onclick="honest();" id="btn_honest">Encontr&eacute; un funcionario honesto</a>

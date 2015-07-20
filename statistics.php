@@ -27,6 +27,7 @@ $top_honest_by_location = $controller->get_top_honest_by_location();
 <html lang="en">  
     <head>
         <title>Mordidas.cr</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="description" content="Mordidas.cr es una aplicación de denuncia ciudadana.">
         <meta name="author" content="Herson Esquivel Vargas">
         <!-- Bootstrap -->
