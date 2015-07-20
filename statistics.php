@@ -67,7 +67,7 @@ $top_honest_by_location = $controller->get_top_honest_by_location();
                 .attr('class', 'd3-tip')
                 .offset([-10, 0])
                 .html(function(d) {
-                return "<strong>Percentage:</strong> <span style='color:red'>" + d.frequency + "</span>";
+                return "<strong>Porcentaje:</strong> <span style='color:red'>" + d.frequency + "</span>";
                 });
                 ////////////////////////////////////////////////////////////////
                 var svg = parent.append("svg")
