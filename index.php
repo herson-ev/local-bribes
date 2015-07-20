@@ -177,7 +177,7 @@ $controller = new indexController();
                             <?php echo $controller->get_full_location_by_id($report["location"]); ?>
 
                         <?php if($paid) { ?>
-                            <i class="fa fa-usd fa-1x" style="padding-left:20px"></i>
+                            <i class="fa" style="padding-left:20px"><b>&#8353;</b></i>
                             <?php echo $report["amount"];
                         } ?>
                     </div>
