@@ -480,6 +480,11 @@ ALTER TABLE `location`
  ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `location`
+--
+ALTER TABLE `report`
+ ADD PRIMARY KEY (`id`);
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
